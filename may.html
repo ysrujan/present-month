@@ -1,0 +1,172 @@
+/**
+* Created by SRUJAN.
+*/
+
+<html>
+<title>Current Month Calendar</title>
+<body bgcolor="#FFFFFF">
+<script Language="JavaScript">
+    <!--
+    // Set variable to the current date
+    var right_now = new Date();
+
+    // set variable to current month number (0-11)
+    var month_num = right_now.getMonth();
+
+    // set variable to the current day value (1-31)
+    var thedate=right_now.getDate();
+
+    // create an array for the month name
+    var month_name = ["January ",
+        "February ",
+        "March ",
+        "April ",
+        "May ",
+        "June ",
+        "July ",
+        "August ",
+        "September ",
+        "October ",
+        "November ",
+        "December "];
+
+    // Create a variable right_year with the current year
+    var right_year=right_now.getYear();
+    if (right_year < 2000)
+        right_year = right_year + 1900;
+
+    // create a variable to specify what the
+    // last day for the current month is
+    var theday = 0;
+    if (
+        month_num === 0 ||
+        month_num === 2 ||
+        month_num === 4 ||
+        month_num === 6 ||
+        month_num === 7 ||
+        month_num === 9 ||
+        month_num === 11)
+    {
+        endofmonth=31;
+    }
+    if (
+        month_num === 3 ||
+        month_num === 5 ||
+        month_num === 8 ||
+        month_num === 10)
+    {
+        endofmonth=30;
+    }
+
+    if (month_num === 1)
+    {
+// This will check for a leap year
+// If the year is evenly divisible by four
+// or in the case of a new century evenly divisible
+// by 400 then the end of the February month should be the 29th
+
+        right_year_divided=right_year/4;
+        right_year_divided_string= String(right_year_divided);
+        var is_decimal = right_year_divided_string.indexOf('.');
+        if (is_decimal != -1)
+        { endofmonth=28; }
+        else
+        { endofmonth=29; }
+
+        right_year_string= String(right_year);
+        var the_century=String(right_year_string.charAt(2));
+        the_century= the_century + String(right_year_string.charAt(3));
+        if (the_century == "00")
+        {
+            right_year_divided=right_year/400;
+            right_year_divided_string= String(right_year_divided);
+            var is_decimal = right_year_divided_string.indexOf('.');
+            if (is_decimal != -1)
+            {endofmonth=28;}
+            else
+            {endofmonth=29;}
+        }
+    }
+
+    document.write(right_now);
+
+    // Start building the table
+    document.write("<table border=1 align=center>");
+    document.write("<caption><b>");
+
+    // Place a caption with the month name and year
+    document.write(month_name[month_num]);
+    document.write(right_year );
+    document.write("</b></caption>");
+
+    // Write the table header row
+    document.write("<tr><th>S</th><th>M</th><th>T</th><th>W</th>");
+    document.write("<th>Th</th><th>F</th><th>Sa</th></tr><tr>");
+
+    // Figure out which day of the week the 1st of the
+    // current month belongs to
+    first_day = new Date(right_year,month_num,1);
+
+
+    // Write the first row in the calendar with dates
+    // Check which date of the month is the first to
+    // fill it into the appropriate day of the week
+    for (counter = 0; counter < 7; counter++)
+    {
+
+// Check the counter aganst the first day of the month value (0 - 6)
+
+        if (counter >= first_day.getDay() )
+        {
+
+// Start counter for the calendar days
+            theday=theday+1;
+
+// Check if the current day is in the first week if so, place bold text
+            if (theday === thedate)
+            {document.write("<td><b>" + theday + "</b></td>");}
+            else
+// If it's not the current date output without bold text
+            {document.write("<td>" + theday + "</td>");}
+        }
+        else
+// if there is no day yet output an empty cell
+        {document.write("<td></td>"); }
+    }
+
+    // End row for the first week of the month
+    document.write("</tr>");
+
+    // Loop for the rest fo the weeks in the month
+    for (weeks = 0; weeks < 5; weeks++)
+    {
+        document.write("<tr>");
+// loop for the days with the remaining weeks
+        for (week = 0; week < 7; week++)
+        {
+
+// counter for the day of the month
+            theday=theday+1;
+
+// if the couter = the current date display in bold
+            if (theday === thedate)
+            {document.write("<td><b>" + theday + "</b></td>");}
+            else
+            {
+
+// if the counter is higher then than the number of days
+// in the month then display a blank cell
+                if (theday > endofmonth)
+                {document.write("<td></td>");}
+                else
+
+// If it's not the cureent day display the date wioth bold type
+                {document.write("<td>" + theday + "</td>"); }
+            }
+        }
+        document.write("</tr>");
+    }
+    document.write("</table>");
+    //--></script>
+</body>
+</html>
