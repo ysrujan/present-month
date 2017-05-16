@@ -1,1 +1,1 @@
-Displays the current month
+Displays the current month.
